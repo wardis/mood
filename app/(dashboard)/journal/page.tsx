@@ -1,5 +1,6 @@
 import EntryCard from '@/components/entry-card'
 import NewEntryCard from '@/components/new-entry-card'
+import { analyse } from '@/utils/ai'
 import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import Link from 'next/link'
@@ -14,6 +15,9 @@ const getEntries = async () => {
       createdAt: 'desc',
     },
   })
+
+  await analyse('write a night time story for my kids. 20 lines.')
+
   return entries
 }
 

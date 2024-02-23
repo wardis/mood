@@ -7,19 +7,21 @@ import { useAutosave } from 'react-autosave'
 export default function Editor({ entry }) {
   const [value, setValue] = useState(entry.content)
   const [isLoading, setIsLoading] = useState(false)
+  const [analysis, setAnalysis] = useState(entry.analysis)
 
   const analysisData = [
-    { name: 'Summary', value: entry?.analysis?.summary },
-    { name: 'Subject', value: entry?.analysis?.subject },
-    { name: 'Mood', value: entry?.analysis?.mood },
-    { name: 'Negative', value: entry?.analysis?.negative ? 'True' : 'False' },
+    { name: 'Summary', value: analysis?.summary },
+    { name: 'Subject', value: analysis?.subject },
+    { name: 'Mood', value: analysis?.mood },
+    { name: 'Negative', value: analysis?.negative ? 'True' : 'False' },
   ]
 
   useAutosave({
     data: value,
     onSave: async (_value) => {
       setIsLoading(true)
-      const updated = await updateEntry(entry.id, _value)
+      const data = await updateEntry(entry.id, _value)
+      setAnalysis(data.analysis)
       setIsLoading(false)
     },
   })

@@ -21,7 +21,7 @@ export const PATCH = async (req: Request, { params }) => {
 
   const analysis = await analyse(updatedEntry.content)
 
-  await prisma.analysis.upsert({
+  const updatedAnalysis = await prisma.analysis.upsert({
     where: {
       entryId: updatedEntry.id,
     },
@@ -36,5 +36,7 @@ export const PATCH = async (req: Request, { params }) => {
 
   revalidatePath(`/journal/${params.id}`)
 
-  return NextResponse.json({ data: updatedEntry })
+  return NextResponse.json({
+    data: { ...updatedEntry, analysis: updatedAnalysis },
+  })
 }

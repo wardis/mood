@@ -16,11 +16,6 @@ const getEntries = async () => {
     },
   })
 
-  await analyse(
-    `    Today was really great day. I finally scored a lot of goals in my football game. Yay!
-    `,
-  )
-
   return entries
 }
 

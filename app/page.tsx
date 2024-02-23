@@ -1,7 +1,10 @@
 import Link from 'next/link'
-import { UserButton } from '@clerk/nextjs'
+import { auth, UserButton } from '@clerk/nextjs'
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth()
+  let href = userId ? '/journal' : '/new-user'
+
   return (
     <div className=" flex h-screen w-screen items-center justify-center bg-black text-white">
       <div className="w-full max-w-[600px] space-y-4">
@@ -10,7 +13,7 @@ export default function Home() {
           Write and track your mood everyday.
         </p>
         <div>
-          <Link href="/journal">
+          <Link href={href}>
             <button className="rounded-lg bg-blue-600 px-4 py-2 text-xl">
               Get started
             </button>

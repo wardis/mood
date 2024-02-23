@@ -16,7 +16,13 @@ const getEntries = async () => {
     },
   })
 
-  await analyse('write a night time story for my kids. 20 lines.')
+  await analyse(
+    `I'm going to give you a journal entry, I want you to analyse for a few things. I need the mood, a summary, what the subject is, and color representing the mood. You need to responsd back with formatted JSON like so: {"mood": "", "subject":"", "color": "", "negative": ""}.
+    
+    entry:
+    Today was really great day. I finally scored a lot of goals in my football game. Yay!
+    `,
+  )
 
   return entries
 }

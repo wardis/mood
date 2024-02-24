@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { auth, UserButton } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs'
 
 export default async function Home() {
   const { userId } = await auth()
@@ -19,7 +19,6 @@ export default async function Home() {
             </button>
           </Link>
         </div>
-        <UserButton />
       </div>
     </div>
   )
